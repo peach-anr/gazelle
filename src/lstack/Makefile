@@ -11,15 +11,11 @@ ROOT_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
 include $(ROOT_DIR)/Printlog.mk
 
-LIB_PATH ?= /usr/lib64
-LWIP_INCLUDE_DIR ?= /usr/include/lwip
+LIB_PATH := /usr/lib/x86_64-linux-gnu
+LWIP_INCLUDE_DIR := /usr/include/lwip
 
-DPDK_VERSION := $(shell rpm -q --queryformat '%{VERSION}' dpdk)
-ifeq ($(DPDK_VERSION),21.11)
-    DPDK_INCLUDE_DIR := /usr/local/include
-else
-    DPDK_INCLUDE_DIR := /usr/include/dpdk
-endif
+DPDK_VERSION := 21.11
+DPDK_INCLUDE_DIR := /usr/include/dpdk
 
 AR = ar
 ARFLAGS = crDP
@@ -59,7 +55,7 @@ CFLAGS += $(SEC_FLAGS)
 CFLAGS += $(INC)
 
 
-LWIP_LIB = $(LIB_PATH)/liblwip.a
+LWIP_LIB = $(LIB_PATH)/liblwip.so
 LIBRTE_LIB = $(LIB_PATH)/librte_pci.so \
              $(LIB_PATH)/librte_bus_pci.so \
              $(LIB_PATH)/librte_cmdline.so \

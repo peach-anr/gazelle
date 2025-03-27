@@ -13,20 +13,8 @@ project(ltran)
 
 set(COMMON_DIR ${PROJECT_SOURCE_DIR}/../common)
 set(LWIP_INCLUDE_DIR /usr/include/lwip)
-
-execute_process(
-    COMMAND rpm -qa dpdk
-    OUTPUT_VARIABLE DPDK_VERSION_FULL
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-)
-string(REGEX MATCH "[0-9]+\\.[0-9]+" DPDK_VERSION ${DPDK_VERSION_FULL})
-
-if (DPDK_VERSION STREQUAL "21.11")
-    set(DPDK_INCLUDE_DIR /usr/local/include/)
-else()
-    set(DPDK_INCLUDE_DIR /usr/include/dpdk)
-endif()
-
+set(DPDK_VERSION 21.11)
+set(DPDK_INCLUDE_DIR /usr/include/dpdk)
 
 set(CMAKE_C_FLAGS "-O2 -g")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DLTRAN_COMPILE -D_GNU_SOURCE -fno-strict-aliasing")
